@@ -1,12 +1,16 @@
 import React from "react";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Button } from "antd";
 import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
   UserOutlined,
   VideoCameraOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+
+import HeaderTabs from "../../components/HeaderTabs";
+import StatisticsCard from "../../components/StatisticsCard";
+import CircularChart from "../../components/CircularChart";
 
 const { Header, Sider, Content } = Layout;
 
@@ -24,9 +28,9 @@ class Dashboard extends React.Component {
   render() {
     return (
       <Layout>
-        <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
+        <Sider trigger={null} collapsed>
           <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+          <Menu mode="inline" theme="light" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1" icon={<UserOutlined />}>
               nav 1
             </Menu.Item>
@@ -39,15 +43,17 @@ class Dashboard extends React.Component {
           </Menu>
         </Sider>
         <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }}>
-            {React.createElement(
-              this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-              {
-                className: "trigger",
-                onClick: this.toggle,
-              }
-            )}
-          </Header>
+          {/* <Header
+            className="site-layout-background"
+            style={{
+              padding: 0,
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <HeaderTabs style={{ width: "100%" }} />
+            <Button type="primary">Premium</Button>
+          </Header> */}
           <Content
             className="site-layout-background"
             style={{
@@ -56,7 +62,27 @@ class Dashboard extends React.Component {
               minHeight: 280,
             }}
           >
-            Content
+            <div style={{ marginBottom: 20 }}>Data Overview</div>
+            <Container>
+              <Grid item container spacing={1}>
+                <Grid item xs={12} md={6} lg={4}>
+                  <StatisticsCard
+                    title="General Results"
+                    data="9.401"
+                    meta="Followers"
+                    circularChart={<CircularChart />}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6} lg={4}>
+                  <StatisticsCard
+                    data="3.900"
+                    meta="Followers"
+                    title="Ratings By Catagory"
+                    circularChart={<CircularChart color="red" />}
+                  />
+                </Grid>
+              </Grid>
+            </Container>
           </Content>
         </Layout>
       </Layout>
