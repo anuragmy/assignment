@@ -11,7 +11,16 @@ class StatisticsCard extends Component {
         <Card title={this.props.title} bordered={false}>
           <Grid item container spacing={2}>
             <Grid item xs={6}>
-              <StatsData meta={this.props.meta} data={this.props.data} />
+              <StatsData
+                meta={this.props.data}
+                data={this.props.meta}
+                style={{
+                  display: "flex",
+                  justifyContnet: "space-around",
+                  alignItems: "baseline",
+                  fontSize: "large",
+                }}
+              />
             </Grid>
             <Grid item xs={6}>
               {this.props.circularChart}
